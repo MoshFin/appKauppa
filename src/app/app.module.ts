@@ -21,6 +21,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrdersSuccessComponent } from './orders-success/orders-success.component';
 
 import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 import { environment } from '../environments/environment';
 
 const appRoutes: Routes =[
@@ -64,7 +65,8 @@ const appRoutes: Routes =[
     AngularFireDatabaseModule
   ],
   providers: [
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

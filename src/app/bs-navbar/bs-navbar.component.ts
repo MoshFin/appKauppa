@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth'; 
+import { AuthService } from '../auth.service'
 
 @Component({
   selector: 'bs-navbar',
@@ -8,14 +8,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class BsNavbarComponent {
 
-  constructor(private angularFireAuth: AngularFireAuth) {
-    angularFireAuth.authState.subscribe( x => 
-      console.log(x)
-    )
+  constructor(private authService: AuthService) {
    }
 
-  logout(){ 
-    this.angularFireAuth.auth.signOut()
+  logout(){
+    this.authService.logout();
   }
 
 }

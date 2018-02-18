@@ -21,4 +21,7 @@
     - adding login button
     - testing the login
 8. implementing logout
+9. disaplying user informations
+10. applying user auth service
+11.protecting routes
 
