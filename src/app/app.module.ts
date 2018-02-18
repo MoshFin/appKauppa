@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AppComponent } from './app.component';
 import { AdminOrdarsComponent } from './admin/admin-ordars/admin-ordars.component';
@@ -16,6 +19,9 @@ import { MyOrdarsComponent } from './my-ordars/my-ordars.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrdersSuccessComponent } from './orders-success/orders-success.component';
+
+import { UserService } from './user.service';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes =[
   /* For all */
@@ -52,9 +58,14 @@ const appRoutes: Routes =[
   imports: [
     BrowserModule,
     NgbModule.forRoot(),// ng-bootstrap
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

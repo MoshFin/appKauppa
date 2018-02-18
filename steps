@@ -16,4 +16,9 @@
 4. installing ng-bootstrap (for dropdown) 
 5. finnishing routes
 6. adding firebase
+7. implementing google login
+    - creating user service
+    - adding login button
+    - testing the login
+8. implementing logout
 
