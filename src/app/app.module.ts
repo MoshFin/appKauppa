@@ -1,16 +1,58 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import { AdminOrdarsComponent } from './admin/admin-ordars/admin-ordars.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { AdminFormComponent } from './admin/admin-form/admin-form.component';
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { MyOrdarsComponent } from './my-ordars/my-ordars.component';
+import { ProductsComponent } from './products/products.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { OrdersSuccessComponent } from './orders-success/orders-success.component';
 
+const appRoutes: Routes =[
+  /* For all */
+  {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'products', component: ProductsComponent},
+  {path: 'shopping-cart', component: ShoppingCartComponent},
+  /* User routes */
+  {path: 'checkout', component: CheckOutComponent},
+  {path: 'my/ordars', component: MyOrdarsComponent},
+  {path: 'ordar-success', component: OrdersSuccessComponent},
+
+  /* Admin routes */
+  {path: 'admin/product/add', component: AdminFormComponent},
+  {path: 'admin/ordars', component: AdminOrdarsComponent},
+  {path: 'admin/products', component: AdminProductsComponent}
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminOrdarsComponent,
+    AdminProductsComponent,
+    AdminFormComponent,
+    BsNavbarComponent,
+    CheckOutComponent,
+    HomeComponent,
+    LoginComponent,
+    MyOrdarsComponent,
+    ProductsComponent,
+    ShoppingCartComponent,
+    OrdersSuccessComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule.forRoot(),// ng-bootstrap
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

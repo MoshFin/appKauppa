@@ -1,0 +1,19 @@
+1. insatlling bootstrap 4
+2. adding components 
+    - admin/admin-ordars
+    - admin/admin-products
+    - admin/admin-form
+    - bs-navbar
+    - check-out
+    - home
+    - login
+    - my-ordars
+    - products
+    - shopping-cart
+
+2. adding and cleaning navbar
+3. defining the routes in AppModules
+4. installing ng-bootstrap (for dropdown) 
+5. finnishing routes
+6. adding firebase
+
