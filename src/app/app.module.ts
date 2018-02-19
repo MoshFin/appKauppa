@@ -23,6 +23,7 @@ import { OrdersSuccessComponent } from './orders-success/orders-success.componen
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { environment } from '../environments/environment';
+import { AuthGuard } from './auth-guard.service';
 
 const appRoutes: Routes =[
   /* For all */
@@ -31,14 +32,14 @@ const appRoutes: Routes =[
   {path: 'products', component: ProductsComponent},
   {path: 'shopping-cart', component: ShoppingCartComponent},
   /* User routes */
-  {path: 'checkout', component: CheckOutComponent},
-  {path: 'my/ordars', component: MyOrdarsComponent},
-  {path: 'ordar-success', component: OrdersSuccessComponent},
+  {path: 'checkout', component: CheckOutComponent, canActivate: [AuthGuard]},
+  {path: 'my/ordars', component: MyOrdarsComponent, canActivate: [AuthGuard]},
+  {path: 'ordar-success', component: OrdersSuccessComponent, canActivate: [AuthGuard]},
 
   /* Admin routes */
-  {path: 'admin/product/add', component: AdminFormComponent},
-  {path: 'admin/ordars', component: AdminOrdarsComponent},
-  {path: 'admin/products', component: AdminProductsComponent}
+  {path: 'admin/product/add', component: AdminFormComponent, canActivate: [AuthGuard]},
+  {path: 'admin/ordars', component: AdminOrdarsComponent, canActivate: [AuthGuard]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -66,7 +67,8 @@ const appRoutes: Routes =[
   ],
   providers: [
     UserService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
