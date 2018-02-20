@@ -24,6 +24,7 @@ import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './auth-guard.service';
+import { AdminAuthGuard } from './admin-auth-guard.service';
 
 const appRoutes: Routes =[
   /* For all */
@@ -37,9 +38,18 @@ const appRoutes: Routes =[
   {path: 'ordar-success', component: OrdersSuccessComponent, canActivate: [AuthGuard]},
 
   /* Admin routes */
-  {path: 'admin/product/add', component: AdminFormComponent, canActivate: [AuthGuard]},
-  {path: 'admin/ordars', component: AdminOrdarsComponent, canActivate: [AuthGuard]},
-  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard]}
+  {
+    path: 'admin/product/add', 
+    component: AdminFormComponent, 
+    canActivate: [AuthGuard]},
+  {
+    path: 'admin/ordars', 
+    component: AdminOrdarsComponent, 
+    canActivate: [AuthGuard, AdminAuthGuard]},
+  {
+    path: 'admin/products', 
+    component: AdminProductsComponent, 
+    canActivate: [AuthGuard, AdminAuthGuard]}
 ];
 
 @NgModule({
@@ -68,7 +78,8 @@ const appRoutes: Routes =[
   providers: [
     UserService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

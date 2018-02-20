@@ -26,6 +26,10 @@
 11. protecting routes
     - auth guard service
     - redirect after login
+12. authorization
+    - storing user
+    - defining admin
+    - admin roles for links
     - 
 
 
