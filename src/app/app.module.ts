@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { AppComponent } from './app.component';
 import { AdminOrdarsComponent } from './admin/admin-ordars/admin-ordars.component';
@@ -25,6 +27,8 @@ import { AuthService } from './auth.service';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './auth-guard.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
+import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
 
 const appRoutes: Routes =[
   /* For all */
@@ -39,9 +43,9 @@ const appRoutes: Routes =[
 
   /* Admin routes */
   {
-    path: 'admin/product/add', 
+    path: 'admin/product/new', 
     component: AdminFormComponent, 
-    canActivate: [AuthGuard]},
+    canActivate: [AuthGuard, AdminAuthGuard]},
   {
     path: 'admin/ordars', 
     component: AdminOrdarsComponent, 
@@ -69,6 +73,8 @@ const appRoutes: Routes =[
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    CustomFormsModule,
     NgbModule.forRoot(),// ng-bootstrap
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
@@ -79,7 +85,9 @@ const appRoutes: Routes =[
     UserService,
     AuthService,
     AuthGuard,
-    AdminAuthGuard
+    AdminAuthGuard,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

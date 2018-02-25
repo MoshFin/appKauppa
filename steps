@@ -30,6 +30,11 @@
     - storing user
     - defining admin
     - admin roles for links
-    - 
+
+13. building a product form
+    - adding categories 
+    - gettin categories from firebase
+14. save a product to firebase
+15. implementing validations
 
 

@@ -1,3 +1,71 @@
-<p>
-  admin-form works!
-</p>
+<form #pf="ngForm" (ngSubmit)="save(pf.value)">
+
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text"
+    ngModel
+    #_title="ngModel"
+    name="title"
+    id="title" 
+    class="form-control"
+    required>
+    <div *ngIf="_title.touched && _title.invalid" class="alert alert-danger">Title is required.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="prise">Prise</label>
+    <div class="input-group">
+        <input type="number"
+        ngModel
+        #_prise="ngModel"
+        id="_prise"
+        name="prise"
+        class="form-control"
+        required
+        [min]="0">
+        <div class="input-group-prepend">
+          <span class="input-group-text">€</span>
+        </div>
+      </div>
+      <div *ngIf="_prise.touched && _prise.invalid"  class="alert alert-danger">
+        <div *ngIf="_prise.errors.required" >Prise is required.</div>
+        <div *ngIf="_prise.errors.min">Prise should be 0 or higher.</div>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select class="form-control" 
+    id="_category"
+    ngModel
+    #_category="ngModel"
+    name="category"
+    required>
+      <option value=""></option>
+      <option *ngFor="let c of categories$ | async" [value]="c.key">
+        {{c.payload.val().name}}
+      </option>
+    </select>
+    <div *ngIf="_category.touched && _category.invalid" class="alert alert-danger">
+      Category is required.</div>
+  </div>
+  
+  <div class="form-group">
+      <label for="imageUrl">Image Url</label>
+      <input type="text"
+      ngModel
+      #_imageUrl="ngModel"
+      name="imageUrl"
+      id="_imageUrl" 
+      class="form-control"
+      required
+      url>
+    <div *ngIf="_imageUrl.touched && _imageUrl.invalid" class="alert alert-danger">
+        <div *ngIf="_imageUrl.errors.required" >Image Url is required.</div>
+        <div *ngIf="_imageUrl.errors.url"> Please enter a valid URL.</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary">Save</button>
+
+</form>
