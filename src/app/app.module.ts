@@ -43,16 +43,22 @@ const appRoutes: Routes =[
 
   /* Admin routes */
   {
-    path: 'admin/product/new', 
+    path: 'admin/products/new', 
     component: AdminFormComponent, 
     canActivate: [AuthGuard, AdminAuthGuard]},
   {
-    path: 'admin/ordars', 
-    component: AdminOrdarsComponent, 
+    path: 'admin/products/:id', 
+    component: AdminFormComponent, 
     canActivate: [AuthGuard, AdminAuthGuard]},
+
   {
     path: 'admin/products', 
     component: AdminProductsComponent, 
+    canActivate: [AuthGuard, AdminAuthGuard]},
+
+  {
+    path: 'admin/ordars', 
+    component: AdminOrdarsComponent, 
     canActivate: [AuthGuard, AdminAuthGuard]}
 ];
 
