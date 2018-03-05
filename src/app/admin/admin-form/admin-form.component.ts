@@ -15,7 +15,12 @@ import { Product } from '../../models/product';
 export class AdminFormComponent implements OnInit {
 
   categories$;
-  product: Product;
+  product: Product = {
+    title: '',
+    price: null,
+    imageUrl: '',
+    category: ''
+  };
   productId;
 
   constructor(
