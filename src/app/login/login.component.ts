@@ -10,9 +10,12 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent{
-
-  constructor(private authService: AuthService) { }
-
+  
+  user: boolean;
+  constructor(private authService: AuthService) {
+    this.authService.AppUser$.subscribe( x => 
+      this.user = x)
+   }
 
   login(){
     this.authService.login()

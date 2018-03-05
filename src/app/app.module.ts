@@ -8,6 +8,12 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { CustomFormsModule } from 'ng2-validation';
+import { MatTableModule } from '@angular/material'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule}  from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { AdminOrdarsComponent } from './admin/admin-ordars/admin-ordars.component';
@@ -85,7 +91,15 @@ const appRoutes: Routes =[
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    // material 
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule
+   // material ends
   ],
   providers: [
     UserService,
