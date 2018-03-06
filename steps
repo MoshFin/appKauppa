@@ -40,6 +40,15 @@
 17. editing product
 18. update product
 19. delete product
+20. products table sorting and searching
+21. products to home page
+    - showing by 
+    - filtering by category
+22. implementing filter products
+    - new component and move filtering category to this new component
+    - 
+    
+
 
 
 

@@ -1,15 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../product.service';
+import { Product } from '../models/product';
+import { ProductObject } from '../models/product-object';
+import { CategoryService } from '../category.service';
+import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 
-  constructor() { }
+  products: ProductObject[]= [];
+  filteredProducts: ProductObject[]= [];
+  categories$;
+  category: string;
 
-  ngOnInit() {
-  }
 
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private productService: ProductService, 
+    private categoryService: CategoryService) {
+
+    this.productService.getAll().switchMap((p: ProductObject[]) => {
+        this.products = p;
+        return activeRoute.queryParamMap
+      }).subscribe(
+          param => {
+            this.category = param.get('category');
+            this.filteredProducts= (this.category) ?  
+              this.filteredProducts = this.products.filter(x => this.category === x.data.category) :
+              this.filteredProducts = this.products;             
+          }
+        )
+        
+    this.categories$ = this.categoryService.getAll().snapshotChanges();
+   }
 }

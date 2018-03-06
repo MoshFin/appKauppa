@@ -29,7 +29,7 @@ export class AdminFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { 
 
-    this.categories$ = categoryService.getCategories().snapshotChanges();
+    this.categories$ = categoryService.getAll().snapshotChanges();
     this.productId = this.route.snapshot.paramMap.get('id');
     
     if(this.productId) {
