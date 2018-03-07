@@ -16,7 +16,7 @@
 
       <ng-container matColumnDef="position">
           <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-          <mat-cell *matCellDef="let p"> {{p.position}} </mat-cell>
+          <mat-cell *matCellDef="let p"> {{p.position}}- </mat-cell>
       </ng-container>
 
       <!-- Title Column -->
@@ -50,24 +50,3 @@
   </div>
   
 <!-- table ends -->
-
-<!--  
-<table class="table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Prise</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of filteredProducts">
-        <td>{{p.data.title}}</td>
-        <td>{{p.data.price | currency: 'EUR': true}}</td>
-        <td>
-          <a [routerLink]="['/admin/products/', p.key]">Edit</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  -->

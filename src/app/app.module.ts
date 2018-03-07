@@ -35,6 +35,8 @@ import { AuthGuard } from './auth-guard.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProdutCardComponent } from './produt-card/produt-card.component';
 
 const appRoutes: Routes =[
   /* For all */
@@ -82,6 +84,8 @@ const appRoutes: Routes =[
     ProductsComponent,
     ShoppingCartComponent,
     OrdersSuccessComponent,
+    ProductFilterComponent,
+    ProdutCardComponent,
   ],
   imports: [
     BrowserModule,

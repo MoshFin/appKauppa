@@ -19,4 +19,7 @@
   .mat-sort-header-sorted {
       color: black
   }
+  .mat-column-position {
+    max-width: 40px;
+  }
   

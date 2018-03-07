@@ -1,4 +1,5 @@
 <div class="row">
+  <!-- product form -->
   <div class="col-md-6">
       <form #pf="ngForm" (ngSubmit)="save(pf.value)">
 
@@ -78,13 +79,10 @@
 
         </form>
   </div>
+  <!-- product card -->
   <div class="col-md-6">
-      <div class="card" *ngIf="product.title" style="width: 18rem;">
-          <img class="card-img-top" [src]="_imageUrl.value" *ngIf="product.imageUrl">
-          <div class="card-body">
-            <h5 class="card-title">{{_title.value}}</h5>
-            <p class="card-text">{{_price.value | currency:'EUR':true}}</p>
-          </div>
-        </div>
+      <produt-card 
+      [product]="product">
+      </produt-card>
   </div>
 </div>
