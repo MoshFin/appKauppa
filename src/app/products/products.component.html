@@ -1,24 +1,28 @@
 <div class="row">
   <div class="col-3">
+
     <product-filter
     [category]="category">
-
     </product-filter>
 
   </div>
   <div class="col">
     <div class="row">
+
       <ng-container *ngFor="let p of filteredProducts; index as i">
         <div class="col">
+
             <produt-card 
             [product]="p.data"
             [actions]="true">
             </produt-card>
+            
         </div>
         <div class="w-100" *ngIf="(i+1)%2 === 0">
           <br>
         </div>
       </ng-container>
+
     </div>
   </div>
 </div>

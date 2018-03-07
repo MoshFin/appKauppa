@@ -7,7 +7,9 @@
           
         </div>
         <div class="card-footer">
-            <a *ngIf="actions" href="#" class="btn btn-primary btn-block">Add to Shop Card</a>
+            <button *ngIf="actions" 
+            (click)="addToShoppingCard(product)"
+            class="btn btn-primary btn-block">Add to Shop Card</button>
         </div>
       </div>
 </ng-container>
