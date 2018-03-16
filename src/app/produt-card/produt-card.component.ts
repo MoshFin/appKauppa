@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ShoppingCardService } from '../shopping-card.service';
+import { ProductObject } from '../models/product-object';
 
 @Component({
   selector: 'produt-card',
@@ -9,33 +10,17 @@ import { ShoppingCardService } from '../shopping-card.service';
 export class ProdutCardComponent {
 
   @Input('product')
-  product;
+  product: ProductObject;
 
   @Input('actions')
   actions : boolean = false;
 
-  constructor(private cardService: ShoppingCardService) { }
-    /* 
-     add shopping card to local Storage
-     if shoppig card has no id then
-     --> call card service
-     --> add product to DB
-     --> add to shoppig card
-     is shopping card has an id then
-     --> add to shopping card
-    */
+  constructor(
+    private shoppingService: ShoppingCardService) { }
     
 
   addToShoppingCard() {
-    let cardId = localStorage.getItem('cardId');
+    this.shoppingService.addToCard(this.product)
 
-    if(!cardId){
-      this.cardService.create().then(result => {
-        localStorage.setItem('cardId', result.key);
-        //add to shopping card
-      })
-    } else {
-      // add to shopping card
-    }
   }
 }
