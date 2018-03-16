@@ -6,29 +6,23 @@ import { ProductObject } from './models/product-object';
 
 @Injectable()
 export class ShoppingCardService {
-
   
-  constructor(private  angularFireDatabase: AngularFireDatabase) {
-
-  }
+  constructor(private  angularFireDatabase: AngularFireDatabase) {}
 
   async addToCard(product: ProductObject) {
 
     let card_id = await this.getOrCreateCardId();
-    let item$ = this.angularFireDatabase
-    .object('/shopping-cards/' + card_id + '/items/' + product.key);
+    let item$ = this.getItem(card_id, product.key);
   
     item$.valueChanges().take(1).subscribe( (item: any)=> {
       
-      if(item) {
-      
-        item$.update({quanity: item.quanity + 1})
-      } else {
-        item$.set({product: product.data, quanity: 1});
-      }
+      item$.update({product: product.data, quanity: (item? item.quanity : 0) +1});
     });
   }
 
+  private getItem(cardId, productId) {
+    return this.angularFireDatabase.object('/shopping-cards/' + cardId + '/items/' + productId);
+  }
 
   private create(){
     return this.angularFireDatabase.list('/shopping-cards').push({
