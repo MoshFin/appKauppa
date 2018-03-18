@@ -12,7 +12,8 @@
       <ng-container *ngFor="let p of filteredProducts; index as i">
         <div class="col">
 
-            <produt-card 
+            <produt-card
+            [shoppingCard]="shoppingCard" 
             [product]="p"
             [actions]="true">
             </produt-card>

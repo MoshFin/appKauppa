@@ -3,40 +3,40 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import { ProductObject } from './models/product-object';
+import { Observable } from 'rxjs/observable';
 
 @Injectable()
 export class ShoppingCardService {
-  
-  constructor(private  angularFireDatabase: AngularFireDatabase) {}
 
-  async addToCard(product: ProductObject) {
+ 
+  constructor(private angularFireDatabase: AngularFireDatabase) { }
 
-    let card_id = await this.getOrCreateCardId();
-    let item$ = this.getItem(card_id, product.key);
-  
-    item$.valueChanges().take(1).subscribe( (item: any)=> {
-      
-      item$.update({product: product.data, quanity: (item? item.quanity : 0) +1});
-    });
+  addToCard(product: ProductObject) {
+    this.AddOrRemoveQuanity(product, 1);
+  }
+
+  removeFromCard(product: ProductObject) {
+    this.AddOrRemoveQuanity(product, -1);
   }
 
   private getItem(cardId, productId) {
     return this.angularFireDatabase.object('/shopping-cards/' + cardId + '/items/' + productId);
   }
 
-  private create(){
+  private create() {
     return this.angularFireDatabase.list('/shopping-cards').push({
       dateCreated: new Date().getTime()
     });
-    
+
   }
 
-  private getShoppingCard(card_id){
-    return this.angularFireDatabase.object('/shopping-cards/'+ card_id);
+  async getShoppingCard(): Promise<Observable<{}>>{
+    let card_id = await this.getOrCreateCardId();
+    return this.angularFireDatabase.object('/shopping-cards/' + card_id).valueChanges();
   }
 
   private async getOrCreateCardId() {
-    
+
     let card_id = localStorage.getItem('cardId');
 
     if (card_id) return card_id;
@@ -45,6 +45,17 @@ export class ShoppingCardService {
     card_id = shopingCard.key
     localStorage.setItem('cardId', card_id);
     return card_id;
+  }
+
+  private async AddOrRemoveQuanity(product, quanity) {
+
+    let card_id = await this.getOrCreateCardId();
+    let item$ = this.getItem(card_id, product.key);
+
+    item$.valueChanges().take(1).subscribe((item: any) => {
+      item$.update({ product: product.data, quanity: (item ? item.quanity : 0) + quanity });
+    });
+
   }
 
 }

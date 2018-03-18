@@ -6,6 +6,7 @@ import { ProductService } from '../../product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { empty } from 'rxjs/Observer';
 import { Product } from '../../models/product';
+import { ProductObject } from '../../models/product-object';
 
 @Component({
   selector: 'app-admin-form',
@@ -15,12 +16,16 @@ import { Product } from '../../models/product';
 export class AdminFormComponent implements OnInit {
 
   categories$;
+
   product: Product = {
     title: '',
     price: null,
     imageUrl: '',
     category: ''
   };
+
+  productObject: ProductObject;
+
   productId;
 
   constructor(
@@ -66,6 +71,12 @@ export class AdminFormComponent implements OnInit {
   }
   private toProductsPage(){
     this.router.navigate(['/admin/products'])
+  }
+
+  getProductObject(): ProductObject{
+    return {key: '', 
+      position: 0, 
+      data: this.product}
   }
 
 }

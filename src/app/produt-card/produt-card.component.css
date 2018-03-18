@@ -3,4 +3,14 @@
 }
 .card-footer {
     padding: 0;
+    text-align: center;
+    height: 39px;
+}
+.toRight {
+position: absolute;
+right: 0;
+}
+.toLeft {
+    position: absolute;
+    left: 0;
 }
