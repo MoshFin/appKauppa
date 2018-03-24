@@ -4,6 +4,9 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import { ProductObject } from './models/product-object';
 import { Observable } from 'rxjs/observable';
+import { Item } from './models/item';
+import { ShoppingCard } from './models/shopping-card';
+import { ShoppingCardDataBase } from './models/shopping-card.db';
 
 @Injectable()
 export class ShoppingCardService {
@@ -29,6 +32,18 @@ export class ShoppingCardService {
     });
 
   }
+
+  async getShoppingCardAsMap(): Promise<Observable<{key: any, data:ShoppingCardDataBase}>>{
+    let card_id = await this.getOrCreateCardId();
+    return this.angularFireDatabase.object('/shopping-cards/' + card_id).snapshotChanges().map(
+      card => {
+        let key = card.key;
+        let data= card.payload.exportVal();
+        return { key, data};
+      }
+    )
+  }
+
 
   async getShoppingCard(): Promise<Observable<{}>>{
     let card_id = await this.getOrCreateCardId();
