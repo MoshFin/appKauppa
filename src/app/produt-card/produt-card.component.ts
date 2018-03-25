@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ShoppingCardService } from '../shopping-card.service';
 import { ProductObject } from '../models/product-object';
 import { Card } from '../models/card';
+import { ShoppingCard } from '../models/shopping-card';
 
 @Component({
   selector: 'produt-card',
@@ -17,7 +18,7 @@ export class ProdutCardComponent {
   actions : boolean = false;
 
   @Input('shoppingCard')
-  shoppingCard: Card
+  shoppingCard: ShoppingCard;
 
   constructor(
     private shoppingService: ShoppingCardService) { }
@@ -33,7 +34,7 @@ export class ProdutCardComponent {
 
   getQuanity(): number {
     if(!this.shoppingCard) return 0;
-    let item = this.shoppingCard.items[this.product.key];
+    let item = this.shoppingCard.itemsMap[this.product.key];
     return item? item.quanity : 0;
   }
 }

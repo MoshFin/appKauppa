@@ -5,8 +5,11 @@ import { Product } from "./product";
 
 export class ShoppingCard {
 
-    constructor(public items: Item[]) {
-
+    items: Item[] = [];
+    constructor(public itemsMap: {[productId: string] : Item}) {
+        for (const key in itemsMap) {
+            this.items.push(itemsMap[key])
+        }
     }
 
     get productIds() {

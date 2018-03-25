@@ -36,7 +36,7 @@ export class ShoppingCardService {
   async getShoppingCard(): Promise<Observable<ShoppingCard>>{
     let card_id = await this.getOrCreateCardId();
     return this.angularFireDatabase.object('/shopping-cards/' + card_id).valueChanges().map(
-      (card: ShoppingCard) => new ShoppingCard(card.items)
+      (card: any) => new ShoppingCard(card.items)
     );
   }
 

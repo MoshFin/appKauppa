@@ -11,9 +11,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let productId of card.productIds">
-        <td>{{card.items[productId].product.title}}</td>
-        <td>{{card.items[productId].quanity}}</td>
+      <tr *ngFor="let item of card.items">
+        <td>{{item.product.title}}</td>
+        <td>{{item.quanity}}</td>
         <td></td>
       </tr>
     </tbody>
