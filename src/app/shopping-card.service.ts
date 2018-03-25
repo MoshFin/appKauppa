@@ -6,6 +6,7 @@ import { ProductObject } from './models/product-object';
 import { Observable } from 'rxjs/observable';
 import { Item } from './models/item';
 import { Card } from './models/card';
+import { ShoppingCard } from './models/shopping-card';
 
 @Injectable()
 export class ShoppingCardService {
@@ -32,9 +33,11 @@ export class ShoppingCardService {
 
   }
 
-  async getShoppingCard(): Promise<Observable<{}>>{
+  async getShoppingCard(): Promise<Observable<ShoppingCard>>{
     let card_id = await this.getOrCreateCardId();
-    return this.angularFireDatabase.object('/shopping-cards/' + card_id).valueChanges();
+    return this.angularFireDatabase.object('/shopping-cards/' + card_id).valueChanges().map(
+      (card: ShoppingCard) => new ShoppingCard(card.items)
+    );
   }
 
   private async getOrCreateCardId() {

@@ -12,7 +12,8 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/shopping-cart">Shopping Cart
-          <span class="badge badge-pill badge-warning">{{shoppingCarditemCount}}</span>
+          <span class="badge badge-pill badge-warning"
+          *ngIf="card$ | async as card">{{ card.shoppingCardItemsQuanities }}</span>
         </a>
       </li>
       

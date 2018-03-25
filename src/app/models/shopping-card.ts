@@ -3,10 +3,20 @@ import { Observable } from 'rxjs/observable';
 
 
 export class ShoppingCard {
-    items: Item[];
+    
+    constructor(public items: Item[]) {
 
+    }
 
-    constructor(){
-        
+    get shoppingCardItemsQuanities() {
+        let count = 0;
+        let items = this.items;
+        for (const key in items) {
+            if (items.hasOwnProperty(key)) {
+                const element = items[key];
+                count += element.quanity
+            }
+        }
+        return count;
     }
 }

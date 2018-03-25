@@ -6,6 +6,7 @@ import { ShoppingCardService } from '../shopping-card.service';
 import { ShoppingCard } from '../models/shopping-card';
 import 'rxjs/add/operator/map';
 import { Item } from '../models/item';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'bs-navbar',
@@ -16,25 +17,15 @@ export class BsNavbarComponent implements OnInit {
 
   appUser: AppUser;
   shoppingCarditemCount: number;
+  card$: Observable<ShoppingCard>;
+
   constructor(private authService: AuthService,
     private cartService: ShoppingCardService) {
   }
 
   async ngOnInit() {
     this.authService.AppUser$.subscribe(appUser => this.appUser = appUser);
-
-    let card$ = await this.cartService.getShoppingCard();
-
-    card$.subscribe((card: ShoppingCard) => {
-      this.shoppingCarditemCount = 0;
-      let items = card.items;
-      for (const key in items) {
-        if (items.hasOwnProperty(key)) {
-          const element = items[key];
-          this.shoppingCarditemCount += element.quanity
-        }
-      }
-    })
+    this.card$ = await this.cartService.getShoppingCard();
   }
 
   logout() {
