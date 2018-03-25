@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 import { ProductObject } from './models/product-object';
 import { Observable } from 'rxjs/observable';
 import { Item } from './models/item';
-import { ShoppingCard } from './models/shopping-card';
-import { ShoppingCardDataBase } from './models/shopping-card.db';
+import { Card } from './models/card';
 
 @Injectable()
 export class ShoppingCardService {
@@ -33,27 +32,13 @@ export class ShoppingCardService {
 
   }
 
-  async getShoppingCardAsMap(): Promise<Observable<{key: any, data:ShoppingCardDataBase}>>{
-    let card_id = await this.getOrCreateCardId();
-    return this.angularFireDatabase.object('/shopping-cards/' + card_id).snapshotChanges().map(
-      card => {
-        let key = card.key;
-        let data= card.payload.exportVal();
-        return { key, data};
-      }
-    )
-  }
-
-
   async getShoppingCard(): Promise<Observable<{}>>{
     let card_id = await this.getOrCreateCardId();
     return this.angularFireDatabase.object('/shopping-cards/' + card_id).valueChanges();
   }
 
   private async getOrCreateCardId() {
-
     let card_id = localStorage.getItem('cardId');
-
     if (card_id) return card_id;
 
     let shopingCard = await this.create();
@@ -63,10 +48,8 @@ export class ShoppingCardService {
   }
 
   private async AddOrRemoveQuanity(product, quanity) {
-
     let card_id = await this.getOrCreateCardId();
     let item$ = this.getItem(card_id, product.key);
-
     item$.valueChanges().take(1).subscribe((item: any) => {
       item$.update({ product: product.data, quanity: (item ? item.quanity : 0) + quanity });
     });

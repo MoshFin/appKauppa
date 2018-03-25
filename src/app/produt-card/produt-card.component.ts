@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ShoppingCardService } from '../shopping-card.service';
 import { ProductObject } from '../models/product-object';
-import { ShoppingCard } from '../models/shopping-card';
+import { Card } from '../models/card';
 
 @Component({
   selector: 'produt-card',
@@ -17,7 +17,7 @@ export class ProdutCardComponent {
   actions : boolean = false;
 
   @Input('shoppingCard')
-  shoppingCard: ShoppingCard
+  shoppingCard: Card
 
   constructor(
     private shoppingService: ShoppingCardService) { }

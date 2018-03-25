@@ -1,10 +1,12 @@
-import { ProductObject } from "./product-object";
+import { Item } from "./item";
+import { Observable } from 'rxjs/observable';
 
-export interface ShoppingCard {
-    key: number;
-    items: {
-        product: ProductObject,
-        quanity: number
-    },
-    
+
+export class ShoppingCard {
+    items: Item[];
+
+
+    constructor(){
+        
+    }
 }
