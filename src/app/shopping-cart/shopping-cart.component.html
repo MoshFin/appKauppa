@@ -7,15 +7,20 @@
       <tr>
         <th>Product</th>
         <th>Quanity</th>
-        <th></th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of card.items">
         <td>{{item.product.title}}</td>
         <td>{{item.quanity}}</td>
-        <td></td>
+        <td>{{item.totalPrice | currency: "EUR": true}}</td>
       </tr>
     </tbody>
+    <tfoot>
+      <th></th>
+      <th></th>
+      <th>{{ card.totalSum | currency: "EUR": true}}</th>
+    </tfoot>
   </table>
 </ng-container>

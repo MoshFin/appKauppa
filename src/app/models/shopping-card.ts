@@ -8,12 +8,25 @@ export class ShoppingCard {
     items: Item[] = [];
     constructor(public itemsMap: {[productId: string] : Item}) {
         for (const key in itemsMap) {
-            this.items.push(itemsMap[key])
+            let item = itemsMap[key]
+            this.items.push(new Item(item.product, item.quanity))
         }
     }
 
     get productIds() {
         return Object.keys(this.items);
+    }
+
+    get totalSum() {
+        let sum = 0;
+        for (const key in this.items) {
+            if (this.items.hasOwnProperty(key)) {
+                const element = this.items[key].totalPrice;
+                sum += element
+                
+            }
+        }
+        return sum;
     }
 
     get shoppingCardItemsQuanities() {
